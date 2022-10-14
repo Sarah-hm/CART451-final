@@ -1,0 +1,118 @@
+* {
+    margin: 0; 
+    font-family:sans-serif;
+}
+
+.menu-bar{
+    height: 20vh;
+    width:100%;
+    background-color:grey;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap; 
+    position:sticky;
+    top: 0; /* Stay on top */
+    transition: all 0.3s;
+    z-index:100;
+}
+
+.top-bar{
+    width:100%;
+    background-color:black;
+    max-height: 7vh;
+    color:white;
+}
+
+.menu-links-section{
+width: 60%;
+justify-content:space-evenly;
+}
+
+.banner{
+    height:70vh;
+    background-color:lightgray;
+    margin:2%;
+}
+
+#banner-top-bar{
+    height:10%;
+    background-color:black;
+    color:white;
+    font-weight:bold;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+#banner-top-bar p{
+    display: block;
+    width: 100%;
+    /* transform: translateX(100%); */
+    margin:auto;
+    animation: move 15s linear infinite 
+}
+
+@keyframes move {
+    to { transform: translateX(-25%); 
+    }
+}
+
+.pop-up{
+    background-color:bisque;
+    height:30vh;
+    width:40%;
+    z-index:5;
+    display: flex;
+    position:fixed;
+    right:0px;
+    top:50%;
+    padding:2%;
+    border-radius:20px 0px 0px 20px;
+    transition: all 1s;
+}
+
+.isOpened{
+    transform:translate(0%);
+}
+
+.isClosed{
+    transform:translate(90%);
+}
+
+.close-pop-up{
+ cursor:pointer;
+}
+
+.pop-up-content{
+    width:90%;
+    padding-left:10%;
+}
+.page{
+    background-color:pink;
+    height:100vh;
+}
+
+.buttons-banner{
+    display:flex;
+    justify-content:space-between;
+    height:40vh;
+    width:100%;
+    background-color:grey;
+    flex-wrap:nowrap;
+}
+
+.button{
+    width:30%;
+    margin:5%;
+    background-color: black;
+    color:white;
+    border-radius:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button p{
+    font-weight:bold;
+   /* text-align:center; */
+}
