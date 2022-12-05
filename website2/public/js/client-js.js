@@ -15,90 +15,32 @@
      }
  });
 
+
+
+
 //close/open pop-up
 
-let popupOpenTimeOut = setTimeout(openPopup, 3000);
 
-$(".close-pop-up").click(function(){
-if($(this).parent().hasClass("isOpened")){
-    $(this).parent().removeClass("isOpened")
-    $(this).parent().addClass("isClosed")
-    setTimeout(()=>{
-        $(this).parent().removeClass("isClosed")
-        $(this).parent().addClass("isOpened")
-    }, 5000)
-}else if($(this).parent().hasClass("isClosed")){
-    $(this).parent().removeClass("isClosed")
-    $(this).parent().addClass("isOpened")
-}
-})
+// let popupOpenTimeOut = setTimeout(openPopup, 3000);
 
-  function openPopup(){
-$(".pop-up").removeClass("isClosed")
-$(".pop-up").addClass("isOpened")
-}
-//get countdown to midnight
-//from: https://stackoverflow.com/questions/54256629/countdown-to-midnight-refresh-every-day
-const Countdown = (() => {
+// $(".close-pop-up").on("click",function(){
+// console.log("close pop up is clicked")
+// if($(this).parent().hasClass("isOpened")){
+//   console.log("parent is opened")
+//     $(this).parent().removeClass("isOpened")
+//     $(this).parent().addClass("isClosed")
+//     setTimeout(()=>{
+//         $(this).parent().removeClass("isClosed")
+//         $(this).parent().addClass("isOpened")
+//     }, 5000)
+// }else if($(this).parent().hasClass("isClosed")){
+//   console.log("parent is closed")
+//     $(this).parent().removeClass("isClosed")
+//     $(this).parent().addClass("isOpened")
+// }
+// })
 
-let nextMidnight = new Date();
-nextMidnight.setHours(24,0,0,0);
-
-const getRemainingTime = () => {
-let now = new Date();
-
-let time = (nextMidnight.getTime() - now.getTime())/1000;
-
-if(time < 0) {
-nextMidnight = new Date();
-nextMidnight.setHours(24,0,0,0);
-
-return getRemainingTime();
-}
-
-return time;
-}
-
-const parseTime = (time) => {
-const hours = Math.floor(time/3600);
-let rest = time-(hours*3600);
-const minutes = Math.floor(rest/60);
-rest = rest-(minutes*60);
-const seconds = Math.floor(rest);
-const milliseconds = (rest-seconds)*1000;
-
-return [hours, minutes, seconds, milliseconds];
-};
-
-const formatTime = (parsedTime) => {
-return '<span class="hours">' + parsedTime[0] + '</span><span class="hSep">:</span><span class="minutes">' + ("0" + parsedTime[1]).slice(-2) + '</span><span class="mSep">:</span><span class="seconds">' + ("0" + parsedTime[2]).slice(-2) + '</span>';
-};
-
-const els = [];
-let timeout;
-
-return (el) => {
-els.push(el);
-
-if(!timeout) {
-
-const refresh = () => {
-  const parsedTime = parseTime(getRemainingTime());
-  const formattedTimes = formatTime(parsedTime);
-  
-  for(let i = 0, iend = els.length; i < iend; i++) {
-    els[i].innerHTML = formattedTimes;
-  }
-  
-  setTimeout(() => {
-    refresh();
-  }, parsedTime[3]);
-};
-refresh();
-
-}
-else el.innerHTML = formatTime(parseTime(getRemainingTime()));
-};
-
-})();
-Countdown(document.getElementById('countdown'));
+//   function openPopup(){
+// $(".pop-up").removeClass("isClosed")
+// $(".pop-up").addClass("isOpened")
+//   }

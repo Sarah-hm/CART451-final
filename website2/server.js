@@ -86,8 +86,6 @@ let result = ipgeolocationApi.getGeolocation(
 
   })
   })
-  
-
 
 }
 
@@ -105,3 +103,28 @@ function handleGeoAPIResponse(json) {
   })
  
 }
+
+
+// ===== everything auth0 and social media logins ====== 
+
+//Configure auth0 router and authentification keys
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'd6f3e1a0f913344ac11928ab2e69db3aa2e4a16e7bf6e56d4cc74af81840147f',
+  baseURL: 'http://localhost:4200',
+  clientID: 'DERCmClxoe2yon43TqtY9LGhOcadae1N',
+  issuerBaseURL: 'https://dev-567ubgavyfpt3loq.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
+

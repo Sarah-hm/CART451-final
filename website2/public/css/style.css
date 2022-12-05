@@ -3,8 +3,6 @@
     font-family:sans-serif;
 }
 
-
-
 .menu-bar{
     height: 20vh;
     width:100%;
@@ -209,4 +207,25 @@ position:absolute;
 .button p{
     font-weight:bold;
    /* text-align:center; */
+}
+
+.popupWindow{
+background-color:white; 
+border: 2px solid black; 
+width: 30%; 
+height: 30vh;
+position: relative;
+}
+
+.popupWindowBanner{
+    background-color:black;
+    height: 5vh;
+    position: absolute; 
+    top:0px;
+    width: 100%; 
+}
+
+.popupWindow-button{
+    border: 2px solid white;
+    border-radius: 5px;
 }
