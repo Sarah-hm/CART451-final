@@ -12,11 +12,14 @@ window.onload = function () {
         //DISPLAY ALL OTHER IP information; 
      console.log("new console");
 
-     let stringResponse = JSON.stringify(response);
+     let stringResponse = JSON.stringify(response.district);
+     let anotherStringResponse = JSON.stringify(response.ip)
      console.log(stringResponse);
      console.log(response.ip);
      document.getElementById("infoBox").innerHTML = `<br> ${response.ip} <br> ${response.district} <br> ${response.isp} <br>`;
       messages.push(stringResponse);
+      messages.push(anotherStringResponse)
+      messages.push("googleStreetView");
     
 
       //  console.log(response);
@@ -42,18 +45,19 @@ window.onload = function () {
         });
       
 
-        //SET UP STREET VIEW
-        const panorama = new google.maps.StreetViewPanorama(
-          document.getElementById("pano"),
-          {
-            position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
-            pov: {
-              heading: 34,
-              pitch: 10,
-            },
-          }
-        );
-        map.setStreetView(panorama);
+        // //SET UP STREET VIEW
+        // const panorama = new google.maps.StreetViewPanorama(
+        //   document.getElementById("pano"),
+        //   {
+        //     position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        //     pov: {
+        //       heading: 34,
+        //       pitch: 10,
+        //     },
+        //   }
+        // );
+        // map.setStreetView(panorama);
+   
        
       //PULL ADDRESS
       let geocoder = new google.maps.Geocoder();
@@ -85,8 +89,8 @@ window.onload = function () {
       }//initMap
 
 
-   return messages;
-    }) //get geoloc
+  //  return messages;
+  //   }) //get geoloc
 
 
 
@@ -97,7 +101,7 @@ window.onload = function () {
  let popupContainerheight = popupContainer.offsetHeight;
 
  let popupWindowWidth = popupContainerwidth/2;
- let popupWindowHeight = popupContainerheight/2;
+ let popupWindowHeight = 2*(popupContainerheight/3);
 
 let zIndex = 10; 
 
@@ -108,10 +112,11 @@ let zIndex = 10;
  //setInterval(createNewPopup,1000, messages, popupContainerwidth, popupContainerheight, popupWindowWidth, popupWindowHeight, i, zIndex,count); 
 let count = -1;
 let newPopUpCounter = messages.length;
+console.log(newPopUpCounter)
 
  let idofInterval = setInterval(function(){
      count =count+1;
-     console.log(count);
+     //console.log(count);
      if(count<messages.length){
          createNewPopup(messages, popupContainerwidth, popupContainerheight, popupWindowWidth, popupWindowHeight, zIndex,count);
      }
@@ -135,14 +140,35 @@ function createNewPopup(popupMessage, popupContainerwidth, popupContainerheight,
  $(".popupContainer").append(`
  <div class = "popupWindow" id = "popup${i}"> 
  <div class = popupBanner> 
- <button id= "button-popup${i}" = "bannerButtonClose">X</button>
+ <button id= "button-popup${i}" class = "bannerButtonClose">X</button>
  <button class = "bannerButtonMin">_</button>
  <button class = "bannerButtonMax">▢</button>
  </div>
- <div class = "popupMessage">
+ <div class = "popupMessage" id = "popup-div-${i}">
  ${popupMessage[i]}
  </div>
  </div>`)
+  if( popupMessage[i]=== "googleStreetView"){
+
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+      zoom: 15,
+    });
+
+     //SET UP STREET VIEW
+
+     const panorama = new google.maps.StreetViewPanorama(
+      document.getElementById(`popup-div-${i}`),
+      {
+        position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        pov: {
+          heading: 34,
+          pitch: 10,
+        },
+      }
+    );
+    map.setStreetView(panorama);
+  }
 
 
 
@@ -159,9 +185,18 @@ function createNewPopup(popupMessage, popupContainerwidth, popupContainerheight,
  $(`#button-popup${i}`).on( "click", function() {
      console.log($(this));
  
+     newPopUpCounter+=1;
+     console.log(newPopUpCounter);
+     let newpopupMessage  ='';
+     
+     if (popupMessage[i]=== "googleStreetView"){
+      newpopupMessage = "googleStreetView"
+     }
    // console.log($(this).parent().parent().find(".popupMessage").html()) 
-   newPopUpCounter+=1;
-    let newpopupMessage = $(this).parent().parent().find(".popupMessage").html()
+   
+    else{
+      newpopupMessage = $(this).parent().parent().find(".popupMessage").html()
+    }
     //console.log(newpopupMessage)
     //settimeout to resend the information from the popup to be created in a new popup;
     $(this).parent().parent().remove();
@@ -193,16 +228,37 @@ function createNewNewPopup(popupMessage, popupContainerwidth, popupContainerheig
  $(".popupContainer").append(`
  <div class = "popupWindow" id = "popup${i}"> 
  <div class = popupBanner> 
- <button class = "bannerButtonClose">X</button>
+ <button id= "button-popup${i}" class = "bannerButtonClose">X</button>
  <button class = "bannerButtonMin">_</button>
  <button class = "bannerButtonMax">▢</button>
  </div>
- <div class = "popupMessage">
+ <div class = "popupMessage" id = "popup-div-${i}">
  ${popupMessage}
  </div>
  </div>`)
 
+ if( popupMessage=== "googleStreetView"){
 
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+    zoom: 15,
+  });
+
+   //SET UP STREET VIEW
+
+   const panorama = new google.maps.StreetViewPanorama(
+    document.getElementById(`popup-div-${i}`),
+    {
+      position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+      pov: {
+        heading: 34,
+        pitch: 10,
+      },
+    }
+  );
+  map.setStreetView(panorama);
+
+}
 
  $(`#popup${i}`).css("top",`${popupYpos}px`);
  $(`#popup${i}`).css("left",`${popupXpos}px`);
@@ -215,12 +271,26 @@ function createNewNewPopup(popupMessage, popupContainerwidth, popupContainerheig
  zIndex++;
 
 
- $(".bannerButtonClose").on( "click", function() {
+ $(`#button-popup${i}`).on( "click", function() {
    // console.log($(this).parent().parent().find(".popupMessage").html()) 
-   newPopUpCounter+=1;
-    let newpopupMessage = $(this).parent().parent().find(".popupMessage").html()
-    console.log(newpopupMessage)
+   //newPopUpCounter+=1;
+   //let newpopupMessage = $(this).parent().parent().find(".popupMessage").html()
+    //console.log(newpopupMessage)
     //settimeout to resend the information from the popup to be created in a new popup;
+
+    newPopUpCounter+=1;
+    console.log(newPopUpCounter);
+    let newpopupMessage  ='';
+    
+    if (popupMessage=== "googleStreetView"){
+     newpopupMessage = "googleStreetView"
+    }
+  // console.log($(this).parent().parent().find(".popupMessage").html()) 
+  
+   else{
+     newpopupMessage = $(this).parent().parent().find(".popupMessage").html()
+   }
+
     $(this).parent().parent().remove();
     setTimeout(createNewNewPopup, 4000, newpopupMessage, popupContainerwidth, popupContainerheight, popupWindowWidth, popupWindowHeight, zIndex,newPopUpCounter)
    });
@@ -237,7 +307,7 @@ function getRandomInt(min, max) {
 }   
 
 
-
+}) //get geoloc
  
 
  };

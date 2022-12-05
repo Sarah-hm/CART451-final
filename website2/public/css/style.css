@@ -244,7 +244,7 @@ position: relative;
     background-color:transparent;
     position:relative;
     left: 15%; 
-    top:15%;
+    top: 15vh;
 }
 
 .popupWindow{
@@ -254,8 +254,9 @@ position: relative;
     border-radius: 2%; 
     z-index: 5; 
     width: 300px; 
-    height: 300px;
+    height: 30vh;
     margin: 4%; 
+    overflow:hidden;
 }
 
 .popupBanner{ 
@@ -283,5 +284,5 @@ position: relative;
 }
 
 .popupMessage{
-
+    height:85%; 
 }
