@@ -28,7 +28,6 @@ let newPopUpCounter = messages.length;
         }
 
     },1000);
-//}
 
 
 function createNewPopup(popupMessage, popupContainerwidth, popupContainerheight, popupWindowWidth, popupWindowHeight, zIndex,i){
