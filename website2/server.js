@@ -19,20 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/testData',handleGetVars);
 app.use('/geoLoc',handleGeo);
 
-//const url = process.env.MONGODB_URI;
-//console.log(url);
-//const FashionModel = require("./DBSchema.js");
-
-//connect to db
-// mongoose.connect(url);
-// let db = mongoose.connection;
-// db.once("open", async function(){
-//   console.log("are here");
-//   FashionModel.find({gender: "Women", masterCategory: "Personal Care"}).then((result) => {
-//     console.log(result);
-//   })
-// })
-
 // make server listen for incoming messages
 server.listen(portNumber, function () {
   console.log("listening on port:: " + portNumber);
