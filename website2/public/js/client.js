@@ -4,6 +4,7 @@ window.onload = function () {
   let messages = [];
 
 //GET AND DISPLAY IP API INFORMATION (google maps, address, ...)
+
   $.get(
     "/geoLoc",
    // if we get a response from the server .... 
@@ -57,9 +58,9 @@ window.onload = function () {
       let longitude = response.longitude;
 
 
-      let ipMessage = `Your IP address is ${ipadd}`
+      let ispMessage = `Your ISP address is ${ipadd}`
 
-      let geoMessage =`Your IP address points to ${latitude} latitude and ${longitude} longitude`
+      let geoMessage =`Your ISP address points to ${latitude} latitude and ${longitude} longitude`
 
       let hereMessage = `<h1 class = "bigPopupMessage"> RIGHT HERE </h1>`
 
@@ -72,7 +73,7 @@ window.onload = function () {
      messages.push(countryMessage);
      messages.push(timezoneMessage);
      messages.push(wifiproviderMessage);
-     messages.push(ipMessage);
+     messages.push(ispMessage);
      messages.push(geoMessage);
      messages.push("geocode");
      messages.push("googleMapsView");

@@ -31,8 +31,12 @@ app.get("/", function (req, res) {
   res.send("<h1>Hello world</h1>");
 });
 
+
+
+
+
 function clientRoute(req, res, next) {
-  console.log("hello");
+
   //Get the IP address
  
 
