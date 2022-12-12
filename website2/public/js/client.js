@@ -58,9 +58,9 @@ window.onload = function () {
       let longitude = response.longitude;
 
 
-      let ispMessage = `Your ISP address is ${ipadd}`
+      let ispMessage = `Your IP address is ${ipadd}`
 
-      let geoMessage =`Your ISP address points to ${latitude} latitude and ${longitude} longitude`
+      let geoMessage =`Your IP address points to ${latitude} latitude and ${longitude} longitude`
 
       let hereMessage = `<h1 class = "bigPopupMessage"> RIGHT HERE </h1>`
 
